@@ -1,18 +1,23 @@
 const express = require('express'),
-bodyParser = require('body-parser'),
-cors = require('cors'),
-morgan = require('morgan');
+    morgan = require('morgan'),
+    mongoose = require('mongoose'),
+    bodyParser = require('body-parser'),
+    cors = require('cors'),
+    config = require('../config/config');
 
 const app = express();
-
-app.use(morgan('dev'))
-app.use(cors())
-app.use(bodyParser.json())
+app.use(morgan('dev'));
+app.use(bodyParser.json());
+app.use(cors());
 
 app.post('/register', (req, res) => {
-    res.send({
-        message: `hello ${req.body.name}!`
-    })
-})
+  res.send(`hello ${req.body.email}`);
+});
 
-app.listen(process.env.PORT || 8081)
+mongoose
+    .connect('mongodb://AleksBartov:Merahba2018@ds247439.mlab.com:47439/aleksbartovworks')
+    .then(() => {
+        app.listen(config.port);
+        console.log('connected to MongoDB...');
+    })
+    .catch((err) => console.log(err));

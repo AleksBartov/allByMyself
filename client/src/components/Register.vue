@@ -1,8 +1,8 @@
 <template>
   <div>
-    <input type='email' name='email' placeholder='email' v-model='email' /><br>
-    <input type='password' name='password' placeholder='password' v-model='password' /><br>
-    <button @click='register'>регистрация</button>
+    <input type='email' name='email' placeholder='email' v-model='email' /><br><br>
+    <input type='password' name='password' placeholder='password' v-model='password' /><br><br>
+    <button @click='register'>REGISTER</button>
   </div>
 </template>
 
@@ -16,8 +16,8 @@ export default {
     }
   },
   methods: {
-    async register () {
-      await AuthenticationService.register({
+    register () {
+      AuthenticationService.register({
         email: this.email,
         password: this.password
       })
@@ -26,7 +26,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
 </style>

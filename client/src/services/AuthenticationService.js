@@ -1,7 +1,6 @@
 import Api from './Api'
-
 export default {
   register (data) {
-    return Api().post('register', data)
+    Api().post('register', data)
   }
 }
