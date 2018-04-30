@@ -3,15 +3,24 @@ const express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
-    config = require('../config/config');
-
-const app = express();
+    config = require('../config/config'),
+    User = require('./models/User'),
+    app = express();
+    
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/register', (req, res) => {
-  res.send(`hello ${req.body.email}`);
+  async function createUser() {
+    const user = new User({
+      email: req.body.email,
+      password: req.body.password
+    });
+    const result = await user.save()
+    console.log(result);
+  }
+  createUser();
 });
 
 mongoose
