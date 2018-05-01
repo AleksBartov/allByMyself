@@ -17,8 +17,9 @@ app.post('/register', (req, res) => {
       email: req.body.email,
       password: req.body.password
     });
-    const result = await user.save()
-    console.log(result);
+    await user.save()
+      .then(user => console.log(user))
+      .catch(err => console.error('there is a problem with your data!'));
   }
   createUser();
 });
